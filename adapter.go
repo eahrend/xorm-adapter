@@ -25,13 +25,14 @@ import (
 )
 
 type CasbinRule struct {
-	PType string `xorm:"varchar(100) index"`
-	V0    string `xorm:"varchar(100) index"`
-	V1    string `xorm:"varchar(100) index"`
-	V2    string `xorm:"varchar(100) index"`
-	V3    string `xorm:"varchar(100) index"`
-	V4    string `xorm:"varchar(100) index"`
-	V5    string `xorm:"varchar(100) index"`
+	PType    string `xorm:"varchar(100) index"`
+	V0       string `xorm:"varchar(100) index"`
+	V1       string `xorm:"varchar(100) index"`
+	V2       string `xorm:"varchar(100) index"`
+	V3       string `xorm:"varchar(100) index"`
+	V4       string `xorm:"varchar(100) index"`
+	V5       string `xorm:"varchar(100) index"`
+	CasbinID int    `xorm:"int(11) not null unique 'casbin_id'"`
 }
 
 // Adapter represents the Xorm adapter for policy storage.
@@ -257,23 +258,23 @@ func (a *Adapter) RemoveFilteredPolicy(sec string, ptype string, fieldIndex int,
 	line := CasbinRule{}
 
 	line.PType = ptype
-	if fieldIndex <= 0 && 0 < fieldIndex + len(fieldValues) {
-		line.V0 = fieldValues[0 - fieldIndex]
+	if fieldIndex <= 0 && 0 < fieldIndex+len(fieldValues) {
+		line.V0 = fieldValues[0-fieldIndex]
 	}
-	if fieldIndex <= 1 && 1 < fieldIndex + len(fieldValues) {
-		line.V1 = fieldValues[1 - fieldIndex]
+	if fieldIndex <= 1 && 1 < fieldIndex+len(fieldValues) {
+		line.V1 = fieldValues[1-fieldIndex]
 	}
-	if fieldIndex <= 2 && 2 < fieldIndex + len(fieldValues) {
-		line.V2 = fieldValues[2 - fieldIndex]
+	if fieldIndex <= 2 && 2 < fieldIndex+len(fieldValues) {
+		line.V2 = fieldValues[2-fieldIndex]
 	}
-	if fieldIndex <= 3 && 3 < fieldIndex + len(fieldValues) {
-		line.V3 = fieldValues[3 - fieldIndex]
+	if fieldIndex <= 3 && 3 < fieldIndex+len(fieldValues) {
+		line.V3 = fieldValues[3-fieldIndex]
 	}
-	if fieldIndex <= 4 && 4 < fieldIndex + len(fieldValues) {
-		line.V4 = fieldValues[4 - fieldIndex]
+	if fieldIndex <= 4 && 4 < fieldIndex+len(fieldValues) {
+		line.V4 = fieldValues[4-fieldIndex]
 	}
-	if fieldIndex <= 5 && 5 < fieldIndex + len(fieldValues) {
-		line.V5 = fieldValues[5 - fieldIndex]
+	if fieldIndex <= 5 && 5 < fieldIndex+len(fieldValues) {
+		line.V5 = fieldValues[5-fieldIndex]
 	}
 
 	_, err := a.engine.Delete(line)
